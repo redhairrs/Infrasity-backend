@@ -57,7 +57,7 @@ app.post("/api/bookmeeting", async (req, res) => {
 
     var mailOptions = await {
       from: "rishab@infrasity.com",
-      to: "aksr2003@gmail.com",
+      to: "shan@infrasity.com",
       subject: "You have new booking",
       html: renderedHtmlContent
 
