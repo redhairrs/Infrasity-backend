@@ -46,8 +46,8 @@ app.post("/api/bookmeeting", async (req, res) => {
     var transporter = await nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: "mail.online.ayush@gmail.com",
-        pass: "lmbn ufzj kqap cpgw"
+        user: "rishab@infrasity.com",
+        pass: "uleq qugk zstc hpju"
       },
       // debug: true,
       // logger: true,
@@ -56,7 +56,7 @@ app.post("/api/bookmeeting", async (req, res) => {
     // console.log(transporter, "transport")
 
     var mailOptions = await {
-      from: "mail.online.ayush@gmail.com",
+      from: "rishab@infrasity.com",
       to: "aksr2003@gmail.com",
       subject: "You have new booking",
       html: renderedHtmlContent
