@@ -31,7 +31,7 @@ app.get("/root2", (req, res) => {
 
 app.post("/api/bookmeeting", async (req, res) => {
   try {
-    const htmlpath = path.join(process.cwd(), "/Backend/htmls/contactpage.html")
+    const htmlpath = path.join(process.cwd(), "/htmls/contactpage.html")
     const htmlTemplate = fs.readFileSync(htmlpath, 'utf8');
     const { fname,lname,company,email,country,ccode, phone} = req.body;
     const renderedHtmlContent = htmlTemplate.replace('{fname}', fname)
