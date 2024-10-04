@@ -48,7 +48,8 @@ app.post("/api/bookmeeting", async (req, res) => {
         user: "mail.online.ayush@gmail.com",
         pass: "lmbn ufzj kqap cpgw"
       }
-    })
+    });
+    console.log(transporter, "transport")
 
     var mailOptions = {
       from: "mail.online.ayush@gmail.com",
@@ -60,7 +61,7 @@ app.post("/api/bookmeeting", async (req, res) => {
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log("The error is ", error)
+        res.send("Error in sending mail", error.message)
       }
     })
 
