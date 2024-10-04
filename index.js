@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 var nodemailer = require("nodemailer");
-const path  = require("path")
+const path = require("path")
 
 
 
@@ -17,15 +17,15 @@ app.get("/", (req, res) => {
 
 
 app.get("/root", (req, res) => {
-    const htmlpath = path.join(process.cwd(), "/")
-    var files = fs.readdirSync(htmlpath);
-    res.send(files);
+  const htmlpath = path.join(process.cwd(), "/")
+  var files = fs.readdirSync(htmlpath);
+  res.send(files);
 });
 
 app.get("/root2", (req, res) => {
-    const htmlpath = path.join(process.cwd(), "/Backend")
-    var files = fs.readdirSync(htmlpath);
-    res.send(files);
+  const htmlpath = path.join(process.cwd(), "/Backend")
+  var files = fs.readdirSync(htmlpath);
+  res.send(files);
 });
 
 
@@ -34,21 +34,23 @@ app.post("/api/bookmeeting", async (req, res) => {
     // console.log(process.env.FROM_EMAIL, process.env.SMTP_PASS, process.env.TO_EMAIL)
     const htmlpath = await path.join(process.cwd(), "/htmls/contactpage.html")
     const htmlTemplate = await fs.readFileSync(htmlpath, 'utf8');
-    const { fname,lname,company,email,country,ccode, phone} = await req.body;
+    const { fname, lname, company, email, country, ccode, phone } = await req.body;
     const renderedHtmlContent = await htmlTemplate.replace('{fname}', fname)
       .replace('{lname}', lname)
-      .replace('{company}',company)
+      .replace('{company}', company)
       .replace('{email}', email)
       .replace('{country}', country)
       .replace('{ccode}', ccode)
       .replace('{phone}', phone)
-    console.log(renderedHtmlContent, "renderedHtmlContent")
+    // console.log(renderedHtmlContent, "renderedHtmlContent")
     var transporter = await nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: "mail.online.ayush@gmail.com",
         pass: "lmbn ufzj kqap cpgw"
-      }
+      },
+      debug: true,
+      logger: true
     });
     // console.log(transporter, "transport")
 
@@ -60,19 +62,23 @@ app.post("/api/bookmeeting", async (req, res) => {
 
     }
 
-    await transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        res.send("Error in sending mail", error.message)
+        console.error("Error in sending mail:", error.message);
+        return res.status(500).send("Error in sending mail: " + error.message);
+      } else {
+        console.log("Email sent successfully: " + info.response);
+        return res.send("All done successfully");
       }
-    })
+    });
 
     res.send("All done successfully")
   } catch (error) {
-      res.send(error.message)
+    res.send(error.message)
   }
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
