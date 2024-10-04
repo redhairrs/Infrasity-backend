@@ -50,7 +50,8 @@ app.post("/api/bookmeeting", async (req, res) => {
         pass: "lmbn ufzj kqap cpgw"
       },
       debug: true,
-      logger: true
+      logger: true,
+      connectionTimeout: 60 * 1000,
     });
     // console.log(transporter, "transport")
 
@@ -62,7 +63,7 @@ app.post("/api/bookmeeting", async (req, res) => {
 
     }
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    await transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.error("Error in sending mail:", error.message);
         return res.status(500).send("Error in sending mail: " + error.message);
