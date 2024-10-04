@@ -49,9 +49,9 @@ app.post("/api/bookmeeting", async (req, res) => {
         user: "mail.online.ayush@gmail.com",
         pass: "lmbn ufzj kqap cpgw"
       },
-      debug: true,
-      logger: true,
-      connectionTimeout: 60 * 1000,
+      // debug: true,
+      // logger: true,
+      // connectionTimeout: 60 * 1000,
     });
     // console.log(transporter, "transport")
 
