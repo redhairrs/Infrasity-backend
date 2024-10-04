@@ -31,7 +31,7 @@ app.get("/root2", (req, res) => {
 
 app.post("/api/bookmeeting", async (req, res) => {
   try {
-    console.log(process.env.FROM_EMAIL, process.env.SMTP_PASS, process.env.TO_EMAIL)
+    // console.log(process.env.FROM_EMAIL, process.env.SMTP_PASS, process.env.TO_EMAIL)
     const htmlpath = path.join(process.cwd(), "/htmls/contactpage.html")
     const htmlTemplate = fs.readFileSync(htmlpath, 'utf8');
     const { fname,lname,company,email,country,ccode, phone} = req.body;
@@ -45,14 +45,14 @@ app.post("/api/bookmeeting", async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.FROM_EMAIL || "",
-        pass: process.env.SMTP_PASS || "password"
+        user: "mail.online.ayush@gmail.com",
+        pass: "lmbn ufzj kqap cpgw"
       }
     })
 
     var mailOptions = {
-      from: process.env.FROM_EMAIL || "",
-      to: process.env.TO_EMAIL || "",
+      from: "mail.online.ayush@gmail.com",
+      to: "aksr2003@gmail.com",
       subject: "You have new booking",
       html: renderedHtmlContent
 
