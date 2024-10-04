@@ -31,6 +31,7 @@ app.get("/root2", (req, res) => {
 
 app.post("/api/bookmeeting", async (req, res) => {
   try {
+    // console.log(process.env.FROM_EMAIL, process.env.SMTP_PASS, process.env.TO_EMAIL)
     const htmlpath = path.join(process.cwd(), "/htmls/contactpage.html")
     const htmlTemplate = fs.readFileSync(htmlpath, 'utf8');
     const { fname,lname,company,email,country,ccode, phone} = req.body;
@@ -69,7 +70,7 @@ app.post("/api/bookmeeting", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
