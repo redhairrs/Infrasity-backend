@@ -32,17 +32,17 @@ app.get("/root2", (req, res) => {
 app.post("/api/bookmeeting", async (req, res) => {
   try {
     // console.log(process.env.FROM_EMAIL, process.env.SMTP_PASS, process.env.TO_EMAIL)
-    const htmlpath = path.join(process.cwd(), "/htmls/contactpage.html")
-    const htmlTemplate = fs.readFileSync(htmlpath, 'utf8');
-    const { fname,lname,company,email,country,ccode, phone} = req.body;
-    const renderedHtmlContent = htmlTemplate.replace('{fname}', fname)
+    const htmlpath = await path.join(process.cwd(), "/htmls/contactpage.html")
+    const htmlTemplate = await fs.readFileSync(htmlpath, 'utf8');
+    const { fname,lname,company,email,country,ccode, phone} = await req.body;
+    const renderedHtmlContent = await htmlTemplate.replace('{fname}', fname)
       .replace('{lname}', lname)
       .replace('{company}',company)
       .replace('{email}', email)
       .replace('{country}', country)
       .replace('{ccode}', ccode)
       .replace('{phone}', phone)
-    var transporter = nodemailer.createTransport({
+    var transporter = await nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: "mail.online.ayush@gmail.com",
@@ -51,7 +51,7 @@ app.post("/api/bookmeeting", async (req, res) => {
     });
     console.log(transporter, "transport")
 
-    var mailOptions = {
+    var mailOptions = await {
       from: "mail.online.ayush@gmail.com",
       to: "aksr2003@gmail.com",
       subject: "You have new booking",
@@ -59,7 +59,7 @@ app.post("/api/bookmeeting", async (req, res) => {
 
     }
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    await transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         res.send("Error in sending mail", error.message)
       }
