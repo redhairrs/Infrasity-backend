@@ -42,6 +42,7 @@ app.post("/api/bookmeeting", async (req, res) => {
       .replace('{country}', country)
       .replace('{ccode}', ccode)
       .replace('{phone}', phone)
+    console.log(renderedHtmlContent, "renderedHtmlContent")
     var transporter = await nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -49,7 +50,7 @@ app.post("/api/bookmeeting", async (req, res) => {
         pass: "lmbn ufzj kqap cpgw"
       }
     });
-    console.log(transporter, "transport")
+    // console.log(transporter, "transport")
 
     var mailOptions = await {
       from: "mail.online.ayush@gmail.com",
